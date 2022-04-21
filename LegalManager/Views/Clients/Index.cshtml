@@ -1,0 +1,70 @@
+﻿@using LegalManager.Models.Entities.Users
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@model IEnumerable<LegalManager.Models.Entities.Clients.Client>
+
+@{
+    ViewData["Title"] = "List of Clients";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h3 class="title">List of Clients</h3>
+            <a class="btn btn-info btn-fill pull-right" asp-action="Create">Create New Client</a>
+        </div>
+        <hr />
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmailAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MobileNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegisteredDate)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmailAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MobileNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegisteredDate)
+                        </td>
+
+                        <td>
+                            <a class="btn btn-primary btn-fill" asp-action="Details" asp-route-id="@item.ClientID">Open</a>
+                            <a class="btn btn-info btn-fill" asp-action="Edit" asp-route-id="@item.ClientID">Edit</a>                          
+                            <a class="btn btn-danger btn-fill" asp-action="Delete" asp-route-id="@item.ClientID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+         
+    </div>
+</div>

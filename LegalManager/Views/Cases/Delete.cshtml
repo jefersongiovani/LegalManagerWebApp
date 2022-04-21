@@ -1,0 +1,67 @@
+﻿@model LegalManager.Models.Entities.Cases.Case
+
+@{
+    Layout = "/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Create a new Case</h4>
+                        <a class="btn btn-info btn-fill pull-right" asp-action="Index">Back to the List</a>
+                    </div>
+                    <hr />
+                    <div class="content">
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.CaseTitle)
+        </dt>
+        <dd class = "col-md-8">
+            @Html.DisplayFor(model => model.CaseTitle)
+        </dd>
+        <dt class = "col-md-4">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class = "col-md-8">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class = "col-md-4">
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+        <dd class = "col-md-8">
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+        <dt class = "col-md-4">
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+        <dd class = "col-md-8">
+            @Html.DisplayFor(model => model.Client.EmailAddress)
+        </dd>
+        <dt class = "col-md-4">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-md-8">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class = "col-md-4">
+            @Html.DisplayNameFor(model => model.CaseType)
+        </dt>
+        <dd class = "col-md-8">
+            @Html.DisplayFor(model => model.CaseType)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CaseID" />
+        <input type="submit" value="Delete" class="btn btn-danger btn-fill" /> 
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+

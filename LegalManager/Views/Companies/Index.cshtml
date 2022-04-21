@@ -1,0 +1,68 @@
+﻿@using LegalManager.Models.Entities.Company
+@model IEnumerable<LegalManager.Models.Entities.Company.Company>
+
+@{
+    ViewData["Title"] = "The Company";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h3 class="title"> Company</h3>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Company Name
+                            </th>
+                            <th>
+                                Company Registration
+                            </th>
+                            <th>
+                                Company URL
+                            </th>
+                            <th>
+                                Company Main E-mail Address
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyRegistration)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyURL)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyDefaultEmail)
+                                </td>
+                                <td>
+                                    <a class="btn btn-info btn-fill" asp-action="Edit" asp-route-id="@item.CompanyID">Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

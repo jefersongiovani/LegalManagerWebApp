@@ -1,0 +1,39 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+
+
+        <div class="col-md-2">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Settings</h4>
+                </div>
+
+                <div class="content">
+                    <div class="nav">
+                        <partial name="_ManageNav" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @RenderBody()
+
+    </div>
+</div>
+
+
+@section Scripts {
+                    @RenderSection("Scripts", required: false)
+                    }

@@ -1,0 +1,90 @@
+﻿@model LegalManager.Models.Entities.Clients.Client
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h3 class="title">Editing @Html.DisplayFor(model => model.FullName)</h3>
+
+            <a class="btn btn-info btn-fill pull-right" asp-action="Index">Back to List</a>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ClientID" />
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmailAddress" class="control-label"></label>
+                            <input asp-for="EmailAddress" class="form-control" />
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="MobileNumber" class="control-label"></label>
+                            <input asp-for="MobileNumber" class="form-control" />
+                            <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RegisteredDate" class="control-label"></label>
+                            <input asp-for="RegisteredDate" class="form-control" />
+                            <span asp-validation-for="RegisteredDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DateOfBirth" class="control-label"></label>
+                            <input asp-for="DateOfBirth" class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="IdentificationName" class="control-label"></label>
+                            <input asp-for="IdentificationName" class="form-control" />
+                            <span asp-validation-for="IdentificationName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Identification" class="control-label"></label>
+                            <input asp-for="Identification" class="form-control" />
+                            <span asp-validation-for="Identification" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Nationality" class="control-label"></label>
+                            <input asp-for="Nationality" class="form-control" />
+                            <span asp-validation-for="Nationality" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                        </hr>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

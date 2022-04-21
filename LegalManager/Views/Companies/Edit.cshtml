@@ -1,0 +1,47 @@
+﻿@model LegalManager.Models.Entities.Company.Company
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Company</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CompanyID" />
+            <div class="form-group">
+                <label asp-for="CompanyName" class="control-label"></label>
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyRegistration" class="control-label"></label>
+                <input asp-for="CompanyRegistration" class="form-control" />
+                <span asp-validation-for="CompanyRegistration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyURL" class="control-label"></label>
+                <input asp-for="CompanyURL" class="form-control" />
+                <span asp-validation-for="CompanyURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyDefaultEmail" class="control-label"></label>
+                <input asp-for="CompanyDefaultEmail" class="form-control" />
+                <span asp-validation-for="CompanyDefaultEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

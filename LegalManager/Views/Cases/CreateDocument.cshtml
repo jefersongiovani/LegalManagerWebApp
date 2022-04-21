@@ -1,0 +1,109 @@
+﻿@model LegalManager.Models.Entities.Documents.DocumentBase
+
+@{
+    ViewData["Title"] = "Create a new Document";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+  <script src="https://cdn.tiny.cloud/1/ge15gfsyvqwctpxtx5cqfdtsuvcglv6z1e1iwtlmjv8fkbln/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h3 class="title">Create a New Document</h3>
+                        <a class="btn btn-info btn-fill pull-right" onClick="history.back()">Back to the List</a>
+                    </div>
+                    <hr />
+                    <div class="content">
+                        <form asp-action="CreateDocument" name="DocForm" onsubmit="submitForm();">
+                            <!--- First part - hidden div and inputs -->
+                            <input type="hidden" asp-for="CaseFK" class="form-control" value="@ViewBag.Id" />
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="DateCreated" class="form-control" value="@ViewBag.Created" />
+
+                            <!-- First row -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label asp-for="DocType" class="control-label">Type of the Case</label>
+                                        <select asp-for="DocType" class="form-control" asp-items="@ViewBag.DocTypes">
+                                            <option>Select a Document Type</option>
+                                        </select>
+
+                                        <span asp-validation-for="DocType" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label asp-for="DocName" class="control-label">Document Name</label>
+                                        <input asp-for="DocName" class="form-control" />
+                                        <span asp-validation-for="DocName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-check">
+                                            <label class="form-check-label">
+                                                Is a Draft? <input class="form-check-input" asp-for="isDraft" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Second row -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label asp-for="DocDescription" class="control-label">Short Description</label>
+                                        <input asp-for="DocDescription" class="form-control" />
+                                        <span asp-validation-for="DocDescription" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <!-- Thiird row -> Document Text Area -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label asp-for="DocumentContent" class="control-label">Document Content</label>
+                                        <textarea asp-for="DocumentContent" class="form-control" id="default-editor" rows="21"></textarea>
+                                        <span asp-validation-for="DocumentContent" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Final row -> button-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="hidden" asp-for="OpenTime" class="form-control" value="@ViewBag.Created" />
+                                    <input type="hidden" asp-for="CloseTime" name="closeTimeDoc" id="closeTime" class="form-control" value="" />
+                                    <div class="form-group">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    tinymce.init({
+      selector: 'textarea#default-editor',
+      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+    });
+  </script>
+
+<script type="text/javascript">
+      function submitForm(){
+          var now = new Date();
+          var dateTime = moment(now).format('DD-MM-YYYY HH:mm:ss');
+
+       document.DocForm.closeTimeDoc.value=dateTime;
+    }
+</script>

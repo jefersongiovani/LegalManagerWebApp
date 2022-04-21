@@ -1,0 +1,169 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using LegalManager.Models.Entities.Users
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!--Starting the Sidebar-->
+<div class="sidebar collapse">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+        data-image="assets/img/sidebar-5.jpg"
+    -->
+
+    <div class="sidebar-wrapper">
+        <div style="text-align: center; display: block; margin-top: 15px;">
+
+                    <a asp-area="Identity" asp-action="Manage" asp-controller="Account">
+                        @if (UserManager.GetUserAsync(User).Result.Photo != null)
+                        {
+                            <p><img alt="Profile Picture"  style="width: 90px; height: 90px; object-fit:cover; border-radius:90px; border-color:white; border-style:solid; border-width:thin" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.Photo))"></p>
+                        }
+                        else
+                        {
+                            <p><img alt="Profile Picture"  style="width: 90px; height: 90px; object-fit:cover; border-radius:90px; border-color:white; border-style:solid; border-width:thin" src="https://via.placeholder.com/90"></p>
+
+                        }
+                    </a>
+
+                    <p>
+                          @UserManager.GetUserAsync(User).Result.FullName
+                    </p>
+
+
+        </div>
+        <hr />
+
+        <ul class="nav">
+            <li>
+                <a class="nav-item" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="pe-7s-signal"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+
+             <li>
+                <a role="button" data-toggle="collapse" href="#Administrative" aria-expanded="true" aria-controls="Administrative">
+                    <i class="pe-7s-config"></i>
+                    <p>Administration</p>
+                </a>
+                <div id="Administrative" class="collapse">
+                    <ul>
+                        <i class="pe-7s-edit"></i>
+                        <a class="link-light" asp-area="" asp-controller="Companies" asp-action="Index"><p>Company Profile</p></a>
+                        <i class="pe-7s-culture"></i>
+                        <a class="link-light" asp-area="" asp-controller="BankAccounts" asp-action="Index"><p>Bank Accounts</p></a>
+                        <i class="pe-7s-id"></i>
+                        <a class="link-light" asp-area="" asp-controller="Users" asp-action="Index"><p>List of Collegues</p></a>
+                        <i class="pe-7s-add-user"></i>
+                        <a class="link-light" asp-area="Identity" asp-controller="Account" asp-action="Register"><p>Add Collegue</p></a>
+                        <i class="pe-7s-key"></i>
+                        <a class="link-light" asp-area="" asp-controller="RoleManager" asp-action="Index"><p>Collegue Roles</p></a>
+                        <i class="pe-7s-loop"></i>
+                        <a class="link-light" asp-area="" asp-controller="UserRoles" asp-action="Index"><p>Assign/Change Roles</p></a>
+                        <i class="pe-7s-plug"></i>
+                        <a class="link-light" asp-area="" asp-controller="Services" asp-action="Index"><p>Services</p></a>
+
+                    </ul>
+                </div>
+            </li>
+
+
+            <li>
+                <a role="button" data-toggle="collapse" href="#Clients" aria-expanded="true" aria-controls="Clients">
+                    <i class="pe-7s-users"></i>
+                    <p>Clients</p>
+                </a>
+                <div id="Clients" class="collapse">
+                    <ul>
+                        <i class="pe-7s-albums"></i>
+                        <a class="link-light" asp-area="" asp-controller="Clients" asp-action="Index"><p>List of Clients</p></a>
+                        <i class="pe-7s-add-user"></i>
+                        <a asp-area="" asp-controller="Clients" asp-action="Create"><p>Add New Client</p></a>
+                    </ul>
+                </div>
+            </li>
+
+
+            <li>
+                <a role="button" data-toggle="collapse" href="#Cases" aria-expanded="false" aria-controls="Cases">
+                    <i class="pe-7s-note2"></i>
+                    <p>Cases</p>
+                </a>
+                <div id="Cases" class="collapse">
+                    <ul>
+                        <i class="pe-7s-copy-file"></i>
+                        <a asp-area="" asp-controller="Cases" asp-action="Index"><p>List of Open Cases</p></a>
+                        <i class="pe-7s-note"></i>
+                        <a asp-area="" asp-controller="Cases" asp-action="Create"><p>Create New Case</p></a>
+                        <i class="pe-7s-diskette"></i>
+                        <a asp-area="" asp-controller="Cases" asp-action="ClosedCases"><p>Closed Cases</p></a>
+                    </ul>
+                </div>
+            </li>
+
+            <li>
+                <a role="button" data-toggle="collapse" href="#Services" aria-expanded="false" aria-controls="Services">
+                    <i class="pe-7s-plug"></i>
+                    <p>Services</p>
+                </a>
+                <div id="Services" class="collapse">
+                    <ul>
+                        <i class="pe-7s-shopbag"></i>
+                        <a asp-area="" asp-controller="Services" asp-action="Index"><p>List of Services</p></a>
+                        <i class="pe-7s-pen"></i>
+                        <a asp-area="" asp-controller="Services" asp-action="Create"><p>Create Service</p></a>
+                    </ul>
+                </div>
+            </li>
+
+            <li>
+                <a role="button" data-toggle="collapse" href="#Finances" aria-expanded="false" aria-controls="Finances">
+                    <i class="pe-7s-culture"></i>
+                    <p>Finance</p>
+                </a>
+                <div id="Finances" class="collapse">
+                    <ul>
+                        <i class="pe-7s-plus"></i>
+                        <a asp-area="" asp-controller="Finances" asp-action="Create"><p>Create Invoice</p></a>
+                       @* <i class="pe-7s-pin"></i>
+                        <a asp-area="" asp-controller="Finances" asp-action="ListOverdue"><p>Overdue Invoices</p></a>
+                        <i class="pe-7s-cash"></i>
+                        <a asp-area="" asp-controller="Finances" asp-action="ListDue"><p>Due Invoices</p></a>
+                        <i class="pe-7s-piggy"></i>
+                        <a asp-area="" asp-controller="Finances" asp-action="ListOverdue"><p>Pay Invoices</p></a>
+                        <i class="pe-7s-paint-bucket"></i>
+                        <a asp-area="" asp-controller="Finances" asp-action="PayInstalment"><p>Pay Instalment</p></a>*@
+                    </ul>
+                </div>
+            </li>
+
+            <li>
+                <a asp-controller="Calendar" asp-action="Home">
+                    <i class="pe-7s-alarm"></i>
+                    <p>Calendar</p>
+                </a>
+            </li>
+           @* <li>
+                <a asp-area="" asp-controller="Reports" asp-action="Index">
+                    <i class="pe-7s-display1"></i>
+                    <p>Reports</p>
+                </a>
+            </li>*@
+            <li class="nav-item active active-pro">
+                <a class="nav-link active" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <i class="pe-7s-power"></i>
+                    <p>Logout</p>
+                </a>
+            </li>
+
+        </ul>
+
+
+
+    </div>
+</div>
+
+<!--End of sidebar-->

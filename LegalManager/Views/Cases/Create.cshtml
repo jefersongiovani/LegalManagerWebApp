@@ -1,0 +1,80 @@
+﻿@using LegalManager.Models.Entities.Users
+@using Microsoft.AspNetCore.Identity
+@using LegalManager.Models.Entities.Cases
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model LegalManager.Models.Entities.Cases.Case
+
+@{
+    ViewData["Title"] = "Create Case";
+
+}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Create a new Case</h4>
+                        <a class="btn btn-info btn-fill pull-right" asp-action="Index">Back to the List</a>
+                    </div>
+                    <hr />
+                    <div class="content">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="clientID" class="control-label" class="h6">Client's Name</label>
+                                        <select asp-for="clientID" class="form-control" asp-items="ViewBag.ClientID">
+                                            <option>Select a Client name...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CaseType" class="control-label">Type of the Case</label>
+                                            <select asp-for="CaseType" class="form-control" asp-items="ViewBag.CaseTypes">
+                                            <option>Select a Case Type</option>
+                                        </select>
+                                            <span asp-validation-for="CaseType" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label asp-for="CaseTitle" class="control-label">Case Title</label>
+                                            <input asp-for="CaseTitle" class="form-control" />
+                                            <span asp-validation-for="CaseTitle" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="ShortDescription" class="control-label">Short Description</label>
+                                            <textarea asp-for="ShortDescription" class="form-control" rows="8"></textarea>
+                                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="form-group">
+                                    <input type="hidden" asp-for="dateCreated" class="form-control" value="@ViewBag.Datetime" />
+                                    <input type="hidden" asp-for="OpenTime" class="form-control" value="@ViewBag.Datetime" />
+                                    <input type="hidden" asp-for="Status" class="form-control" value="@ViewBag.Status" />
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                    <input type="hidden" asp-for="OwnerIDFK" value="@UserManager.GetUserAsync(User).Result.Id" />
+                                </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

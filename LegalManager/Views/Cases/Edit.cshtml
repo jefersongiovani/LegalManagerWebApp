@@ -1,0 +1,65 @@
+﻿@using LegalManager.Models.Entities.Cases
+@model LegalManager.Models.Entities.Cases.Case
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h3 class="title">Edit Case Basics</h3>
+            <a class="btn btn-info pull-right" asp-action="Index">Back to List</a>
+        </div>
+        <hr />
+        <form asp-action="Edit">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="CaseID" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="CaseTitle" class="control-label"></label>
+                                <input asp-for="CaseTitle" class="form-control" />
+                                <span asp-validation-for="CaseTitle" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ShortDescription" class="control-label"></label>
+                                <textarea rows="8" asp-for="ShortDescription" class="form-control"></textarea>
+                                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="dateCreated" class="control-label"></label>
+                        <input asp-for="dateCreated" class="form-control" />
+                        <span asp-validation-for="dateCreated" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="Status" class="control-label">Case Statuses</label>
+                        <select asp-for="Status" class="form-control" asp-items="ViewBag.Status">
+                            <option>Select a new status</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" asp-for="OwnerIDFK" />
+                        <input type="hidden" asp-for="clientID" />
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,45 @@
+﻿@using LegalManager.Models
+@model List<LegalManager.Models.Entities.Users.ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h3 class="title">Collegues and Roles</h3>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                              
+                                <th>Is Active?</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td><span class="text-primary">@user.FullName</span></td>
+                                    <td>@user.Email</td>
+                                    
+                                    <td><input asp-for="@user.UserStatus" class="form-check-input" disabled /> </td>
+                                    <td>
+
+                                        <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.Id">Edit Collegue</a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

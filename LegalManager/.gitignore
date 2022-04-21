@@ -1,0 +1,60 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.idea/
+
+*.DS_Store
+# Build output
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# cache for misc downloads
+artifacts/
+
+# dotnet install directory
+.dotnet/
+
+ # Visual Studio 2015 cache/options directory
+.vs/
+
+# Visual Studio Code cache/options directory
+.vscode/
+
+# Visual Studio debug profile
+**/launchSettings.json
+
+# Test files
+*.trx
+
+# User-specific files
+*.suo
+*.user
+*.cshtml~
+*.cs~
+*.dtbcache.v2
+.futdcache.v1
+# ImageBuilder directory
+.Microsoft.DotNet.ImageBuilder
+
+Db/
+.vs/LegalManager/DesignTimeBuild/.dtbcache.v2
+*.v2
+*.v1
+.vs/LegalManager/v17/.suo
+.vs/LegalManager/v17/.suo
+*.v1
+*.v2
+/*.v2/
+*.v2
+*.v2
+.v1/
+.vs/LegalManager/v17/.suo
+.vs/LegalManager/v17/.suo
+.vs/LegalManager/v17/.futdcache.v1
+.v2/
+
+# Local directory for updates
+/Migrations
