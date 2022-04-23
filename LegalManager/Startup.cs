@@ -20,8 +20,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-
+using System.IO;
 
 namespace LegalManager
 {
@@ -59,12 +60,15 @@ namespace LegalManager
                 Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDatabaseDeveloperPageExceptionFilter();
 
-            //Setting the Individual User Authentication (IdentityUser) and the Role based access
+            ///Setting the Individual User Authentication (IdentityUser) and the Role based access
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+
+
+            ///Building the authorization policies 
             services.AddAuthorization(options =>
             {
                 ///Creating the policies for the users
@@ -73,19 +77,16 @@ namespace LegalManager
                     policy.RequireRole("Administrator", "Owner"));
 
                 ///Policies for Legal Advisers
-                ///
                 options.AddPolicy("LegalAccess", policy =>
                     policy.RequireRole("Solicitor", "OISC", "Mediator", "Paralegal", "LegalAssistant"));
 
                 ///Policy for specific Legal Advisers
-                ///
                 options.AddPolicy("MediatorAccess", policy =>
                    policy.RequireRole("Mediator"));
                 options.AddPolicy("ImmigrationAccess", policy =>
                    policy.RequireRole("OISC", "Solicitor"));
 
                 ///Policy for Managers and specific areas
-                ///
                 options.AddPolicy("ManagerAccess", policy =>
                     policy.RequireRole("BookKeeper", "Manager"));
 
@@ -96,12 +97,13 @@ namespace LegalManager
                     policy.RequireRole("Basic"));
 
                 /// Policy for the entire system.To access the system the user needs to be logged in
-
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .Build();
 
             });
+
+
             services.AddAntiforgery(options =>
                 options.HeaderName = "LEGALMANAGERAPP-XSRF-TOKEN");
 
@@ -145,23 +147,26 @@ namespace LegalManager
                 /// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                OnPrepareResponse = content =>
-                {
-                    if (content.File.Name.EndsWith(".js.gz"))
-                    {
-                        content.Context.Response.Headers["Content-Type"] = "text/javascript";
-                        content.Context.Response.Headers["Content-Encoding"] = "gzip";
-                    }
-                }
-            });
 
+            app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+            
             app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseAuthentication(); ///<-- Must be the first middleware to be set
+
             app.UseAuthorization();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                       Path.Combine(env.ContentRootPath, "AppData/_clients")),
+                RequestPath = "/StaticFiles"
+            });
+
+
+            app.UseResponseCompression();
 
             app.UseEndpoints(endpoints =>
             {

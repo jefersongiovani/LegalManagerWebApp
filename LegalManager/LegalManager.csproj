@@ -19,23 +19,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="AppData\**" />
       <Compile Remove="Migrations\**" />
       <Compile Remove="Pages\**" />
       <Compile Remove="Views\CalendarEvents\**" />
-      <Content Remove="AppData\**" />
       <Content Remove="Migrations\**" />
       <Content Remove="Pages\**" />
       <Content Remove="Views\CalendarEvents\**" />
-      <EmbeddedResource Remove="AppData\**" />
       <EmbeddedResource Remove="Migrations\**" />
       <EmbeddedResource Remove="Pages\**" />
       <EmbeddedResource Remove="Views\CalendarEvents\**" />
-      <None Remove="AppData\**" />
       <None Remove="Migrations\**" />
       <None Remove="Pages\**" />
       <None Remove="Views\CalendarEvents\**" />
-      <TypeScriptCompile Remove="AppData\**" />
       <TypeScriptCompile Remove="Migrations\**" />
       <TypeScriptCompile Remove="Pages\**" />
       <TypeScriptCompile Remove="Views\CalendarEvents\**" />
@@ -100,6 +95,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="AppData\_finance\" />
+      <Folder Include="AppData\_clients\" />
       <Folder Include="wwwroot\_temp\" />
     </ItemGroup>
 
