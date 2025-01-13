@@ -4,11 +4,11 @@
 ## ACCESSING THE APPLICATION ONLINE
 
 
-### 1. Accessing the application
+### 1. Accessing the application - No Longer active. Please install the application locally.
 -------------
 
-+ a)	Open the Internet browser and go to: https://legalmanager.personalapps.online
-+ b)	Login with one of the users presented in **part 2**
+<del> + a)	Open the Internet browser and go to: https://legalmanager.personalapps.online </del>
+<del> + b)	Login with one of the users presented in **part 2** </del>
 
 
 ### 2. Pre-defined Users
